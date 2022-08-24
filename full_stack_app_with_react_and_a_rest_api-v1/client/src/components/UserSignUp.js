@@ -96,7 +96,10 @@ submit = () => {
     if(errors.length) {
       this.setState({ errors });
     } else {
-      console.log(`${firstName} is successfully signed up and authenticated!`);
+      context.actions.signIn(emailAddress, password)
+      .then(() => {
+        this.props.history.push('/');    
+      })
     }
     })
     .catch( err => { // handle rejected promises
