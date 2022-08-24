@@ -1,38 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Header from './components/Header';
-import Courses from './components/Courses';
+// import Courses from './components/Courses';
+import UserSignUp from './components/UserSignUp';
+import UserSignIn from './components/UserSignIn';
+import UserSignOut from './components/UserSignIn';
+import NotFound from './components/NotFound';
+import withContext from './components/Context';
+//import PrivateRoute from './components/PrivateRoute';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+
+
+
+
+const UserSignUpWithContext = withContext(UserSignUp);
+const UserSignInWithContext = withContext(UserSignIn);
+const UserSignOutWithContext = withContext(UserSignOut);
+const HeaderWithContext = withContext(Header);
 
 const  App = () => {
-  const [courses, setCourses] = useState([]);
-  useEffect(() => {
-    fetch('http://localhost:5000/api/courses')
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      setCourses(data);
-    })
-  .catch((err) => {
-    console.log(err.message);
-  });
-  }, []);
   return (
     <div>
-   <Header />
-   <div className="course-container">
-      {courses.map((course) => {
-         return (
-            <div className="course-card" key={course.id}>
-               <h2 className="course-title">{course.title}</h2>
-               <p className="course-desc">{course.description}</p>
-               <p className="course-est-time">{course.estimatedTime}</p>
-               <p className="course-materials">{course.materialsNeeded}</p>
-            </div>
-         );
-      })}
+       <Router>
+   <div>
+   <HeaderWithContext />
+   <Switch>
+    {/* <Route exact path="/" component={Public} /> */}
+    {/* <Route path="/authenticated" component={Authenticated} /> */}
+    {/* <PrivateRoute path="/courses/create" component={CreateCourse} />
+    <PrivateRoute path="/courses/:id/update" component={UpdateCourse} /> */}
+    <Route path="/signin" component={UserSignInWithContext} />
+    <Route path="/signup" component={UserSignUpWithContext} />
+    <Route path="/signout" component={UserSignOutWithContext} />
+    <Route path="/error" component={NotFound} />
+  </Switch>
+</div>
+   </Router>
    </div>
-   </div>
-   
   );
 }
 
