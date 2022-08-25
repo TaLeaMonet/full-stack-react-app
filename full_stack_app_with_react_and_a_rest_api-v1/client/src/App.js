@@ -25,7 +25,7 @@ const  App = () => {
        <Router>
    <div>
    <HeaderWithContext />
-   <CreateCourse/>
+   <CreateCourse /> 
    <Switch>
     {/* <Route exact path="/" component={Public} /> */}
     {/* <Route path="/authenticated" component={Authenticated} /> */}
