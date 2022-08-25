@@ -9,7 +9,7 @@ function CourseDetail() {
   const authUser = context.authenticatedUser
   const [errors, setErrors] = useState([]);
   const [course, setCourse] = useState([]);
-  // const [id, setId] = useState([]);
+  const [user, setUser] = useState({firstName: "", lastName: ""});
  const {id} = useParams();
   console.log(authUser);
 
@@ -31,11 +31,12 @@ function CourseDetail() {
   useEffect(() => {
     axios.get(`http://localhost:5000/api/courses/${id}`)
       .then((res) => {
-        console.log(res);
-        setCourse(res.data);
+        console.log(res)
+        setCourse(res.data)
+        setUser(res.user)
       })
       .catch((err) => {
-        console.log(err.message);
+        console.log(err.message)
       });
   }, []);
   
@@ -55,7 +56,8 @@ function CourseDetail() {
       <div className="actions--bar">
         <div className="wrap">
 
-          {/* { authUser && authUser.id === u */}
+          { authUser && authUser.id === user.id ? (
+          <React.Fragment>
           <Link className="button" to={`courses/${id}/update`}>
             Update Course
           </Link>
@@ -65,6 +67,14 @@ function CourseDetail() {
           <Link className="button button-secondary" to="/">
             Return to List
           </Link>
+          </React.Fragment>
+          ) : ( 
+            <React.Fragment>
+               <Link className="button button-secondary" to="/">
+            Return to List
+          </Link>
+          </React.Fragment>
+          )}   
         </div>
       </div>
       <div className="wrap">
@@ -75,7 +85,7 @@ function CourseDetail() {
             <div>
               <h3 className="course--detail--title">Course</h3>
               <h4 className="course--name"></h4>
-              <p>By {}</p>
+              <p>{`By ${authUser.firstName} ${authUser.lastName}`}</p>
             </div>
             <div>
               <h3 className="course--detail--title">Estimated Time</h3>

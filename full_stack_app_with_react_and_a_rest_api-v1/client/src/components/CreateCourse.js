@@ -21,8 +21,8 @@ export default class CreateCourse extends React.PureComponent {
       errors
     } = this.state
       return (
-        <div className="bounds">
-          <div className="grid-33 centered signin">
+        <main>
+          <div className="wrap">
             <h1>Create Course</h1>
             <Form 
               cancel={this.cancel}
@@ -31,6 +31,8 @@ export default class CreateCourse extends React.PureComponent {
               submitButtonText="Create Course"
               elements={() => (
                 <React.Fragment>
+                  <div className='main--flex'>
+                    <div>
                   <label htmlFor="coureTitle">Course Title</label>
                   <input 
                     id="title" 
@@ -46,6 +48,8 @@ export default class CreateCourse extends React.PureComponent {
                     type="text"
                     value={description} 
                     onChange={this.change} />
+                    </div>
+                    <div>
                     <label htmlFor="estimatedTime">Estimated Time</label>
                   <input 
                     id="estimatedTime" 
@@ -60,10 +64,12 @@ export default class CreateCourse extends React.PureComponent {
                     type="text"
                     value={materialsNeeded} 
                     onChange={this.change}  />
+                    </div>
+                    </div>
                 </React.Fragment>
               )} />
           </div>
-        </div>
+          </main>
       );
   }
 

@@ -17,37 +17,48 @@ class UserSignIn extends Component {
         errors
       } = this.state
 
-      return(
-        <div className="bounds">
+      return (
+        <div className="form--centered">
           <div className="grid-33 centered signin">
             <h1>Sign In</h1>
-            <Form 
+            <Form
               cancel={this.cancel}
               errors={errors}
               submit={this.submit}
               submitButtonText="Sign In"
               elements={() => (
                 <React.Fragment>
-                  <input 
-                    id="emailAddress" 
-                    name="emailAddress" 
+                  <input
+                    id="emailAddress"
+                    name="emailAddress"
                     type="text"
-                    value={emailAddress} 
-                    onChange={this.change} />
-                  <input 
-                    id="password" 
+                    value={emailAddress}
+                    onChange={this.change}
+                    placeholder="User Name" />
+                  <input
+                    id="password"
                     name="password"
-                    type="text"
-                    value={password} 
-                    onChange={this.change}  />
+                    type="password"
+                    value={password}
+                    onChange={this.change}
+                    placeholder="Password" />
                 </React.Fragment>
-              )} />
-            <p>
-              Already have a user account? <Link to="/signin">Click here</Link> to sign in!
-            </p>
+              )}
+              />
+            <p>Don't have a user account? Click here to <Link to="/signup">sign up</Link>!</p>
           </div>
         </div>
       );
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
     }
     change = (e) => {

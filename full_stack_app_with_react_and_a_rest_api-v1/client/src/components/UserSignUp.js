@@ -21,48 +21,61 @@ export default class UserSignUp extends Component {
       } = this.state
 
       return (
-        <div className="bounds">
+        <div className="form--centered">
           <div className="grid-33 centered signin">
             <h1>Sign Up</h1>
-            <Form 
+            <Form
               cancel={this.cancel}
               errors={errors}
               submit={this.submit}
               submitButtonText="Sign Up"
               elements={() => (
                 <React.Fragment>
-                  <input 
-                    id="firstName" 
-                    name="firstName" 
+                   <label htmlFor="firstName">First Name</label>
+                  <input
+                    id="firstName"
+                    name="firstName"
                     type="text"
-                    value={firstName} 
-                    onChange={this.change}  />
-                    <input 
-                    id="lastName" 
-                    name="lastName" 
-                    type="text"
-                    value={lastName} 
+                    value={firstName}
                     onChange={this.change} />
-                  <input 
-                    id="emailAddress" 
-                    name="emailAddress" 
+                    <label htmlFor="lastName">Last Name</label>
+                  <input
+                    id="lastName"
+                    name="lastName"
                     type="text"
-                    value={emailAddress} 
-                    onChange={this.change} />
-                  <input 
-                    id="password" 
+                    value={lastName}
+                    onChange={this.change}
+                    />
+                    <label htmlFor="emailAddress">Email Address</label>
+                    <input
+                    id="emailAddress"
+                    name="emailAddress"
+                    type="text"
+                    value={emailAddress}
+                    onChange={this.change}
+                    />
+                    <label htmlFor="password">Password</label>
+                  <input
+                    id="password"
                     name="password"
                     type="text"
-                    value={password} 
-                    onChange={this.change}  />
+                    value={password}
+                    onChange={this.change}
+                     />
                 </React.Fragment>
               )} />
-            <p>
-              Already have a user account? <Link to="/signin">Click here</Link> to sign in!
-            </p>
+            <p>Already have a user account? Click here to <Link to="/signin">sign in</Link>!</p>
           </div>
         </div>
       );
+  
+  
+  
+  
+  
+  
+  
+  
   }
 
  change = (e) => {
