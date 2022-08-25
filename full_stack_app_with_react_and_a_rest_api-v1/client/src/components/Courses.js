@@ -14,22 +14,20 @@ const Courses = () => {
     });
     }, []);
       return(
-        <div className="wrap main--grid">
-        <a className="course--module course--link" href="course-detail.html">
-          <h2 className="course--label">Course</h2>
-          <h3 className="course--title"></h3>
-        </a>
+        
 
         <div className="course-container">
       {courses.map((course) => {
          return (
-            <div className="course-card" key={course.id}>
-               <h2 className="course-title"></h2>
+            <div className="wrap main--grid" key={course.id}>
+            <a className="course--module course--link" href="course-detail.html">
+              <h2 className="course--label">{course.label}</h2>
+              <h3 className="course--title">{course.title}</h3>
+            </a>
             </div>
          );
       })}
    </div>
-      </div>
       )
     }
   

@@ -32,7 +32,6 @@ export class Provider extends Component {
       </Context.Provider>  
     );
   }
-
   
   signIn = async (emailAddress, password) => {
     const user = await this.data.getUser(emailAddress, password);
@@ -45,11 +44,11 @@ export class Provider extends Component {
 
     return user; 
   }
-
-  signOut = () => {
-    this.setState({ authenticatedUser: null });
-  }
 }
+signOut = () => {
+  this.setState({ authenticatedUser: null });
+}
+
 }
 
 export const Consumer = Context.Consumer;
