@@ -80,6 +80,8 @@ export default class CreateCourse extends React.PureComponent {
 
 submit = () => {
   const { context } = this.props;
+  const emailAddress = context.authenticatedUser.emailAddress
+  const password = context.authenticatedUser.password
 
   const {
     title,
@@ -93,7 +95,7 @@ submit = () => {
     estimatedTime,
     materialsNeeded,
   };
-  context.data.createCourse(course)
+  context.data.createCourse(course, emailAddress, password)
   .then(res => {
     console.log(res);
   })

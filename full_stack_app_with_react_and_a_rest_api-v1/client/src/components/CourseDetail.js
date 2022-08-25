@@ -38,9 +38,17 @@ function CourseDetail() {
       });
   }, []);
   
+
   const deleteButton = () => {
-    
+    const emailAddress = authUser.emailAddress
+    const password = authUser.password
+
+    context.data.deleteCourse(id, emailAddress, password)
+    .then((res) => {
+      console.log(res);
+    }) 
   }
+
   return (
     <main>
       <div className="actions--bar">

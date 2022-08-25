@@ -20,6 +20,7 @@ const UserSignOutWithContext = withContext(UserSignOut);
 const HeaderWithContext = withContext(Header);
 const CourseDetailWithContext = withContext(CourseDetail);
 const CreateCourseWithContext = withContext(CreateCourse);
+// const UpdateCourseWithContext = withContext(UpdateCourse);
 // const AuthWithContext = withContext(Authenticated);
 
 const  App = () => {
