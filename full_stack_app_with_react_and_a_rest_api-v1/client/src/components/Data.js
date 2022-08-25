@@ -65,9 +65,9 @@ export default class Data {
       throw new Error();
     }
   }
-  async createCourses(id, emailAddress, password) {
-    const response = await this.api('/courses', 'POST', id, null, true, {emailAddress, password});
-    if (response.status === 200) {
+  async createCourses(course, emailAddress, password) {
+    const response = await this.api('/courses/create', 'POST', course, null, true, {emailAddress, password});
+    if (response.status === 201) {
       return response.json().then(data => data);
     }
     else if (response.status === 400) {
@@ -80,9 +80,9 @@ export default class Data {
     }
   }
  
-  async updateCourses(id, emailAddress, password) {
-    const response = await this.api('/courses', 'POST', id, null, true, {emailAddress, password});
-    if (response.status === 200) {
+  async updateCourses(id, course, emailAddress, password) {
+    const response = await this.api(`/courses/${id}`, 'POST', course, null, true, {emailAddress, password});
+    if (response.status === 204) {
       return response.json().then(data => data);
     }
     else if (response.status === 400) {
@@ -96,14 +96,27 @@ export default class Data {
   }
 
   async deleteCourses(id, emailAddress, password) {
-    const response = await this.api('/courses', 'POST/DELETE?', id, null, true, {emailAddress, password});
-    if (response.status === 200) {
+    const response = await this.api(`/courses/${id}`, 'DELETE', null, true, {emailAddress, password});
+    if (response.status === 204) {
       return response.json().then(data => data);
     }
     else if (response.status === 401) {
       return response.json().then(data => {
         return data.errors;
       });
+    }
+    else {
+      throw new Error();
+    }
+  }
+
+  async getCourse(id) {
+    const response = await this.api(`/courses/${id}`, 'GET', null, false);
+    if (response.status === 200) {
+      return response.json().then(data => data);
+    }
+    else if (response.status === 401) {
+        return null;
     }
     else {
       throw new Error();
