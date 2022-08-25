@@ -8,6 +8,7 @@ import NotFound from './components/NotFound';
 import withContext from './components/Context';
 //import PrivateRoute from './components/PrivateRoute';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import CreateCourse from './components/CreateCourse';
 
 
 
@@ -24,7 +25,7 @@ const  App = () => {
        <Router>
    <div>
    <HeaderWithContext />
-   <Courses />
+   <CreateCourse/>
    <Switch>
     {/* <Route exact path="/" component={Public} /> */}
     {/* <Route path="/authenticated" component={Authenticated} /> */}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 class CreateCourse extends Component {
 
@@ -49,7 +49,7 @@ class CreateCourse extends Component {
           </button>
           <button
             className="button button-secondary"
-            onclick="event.preventDefault(); location.href='index.html';"
+            onClick="event.preventDefault(); location.href='index.html';"
           >
             Cancel
           </button>
