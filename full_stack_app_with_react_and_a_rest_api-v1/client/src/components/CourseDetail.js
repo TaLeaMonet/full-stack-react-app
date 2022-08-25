@@ -2,9 +2,13 @@ import React from 'react';
 
 class CourseDetail extends Component {
 
-    state = {
-      courseDetail: [],
-    }
+  state = {
+    courseTitle: "",
+    courseDescription: "", 
+    estimatedTime: "",
+    materialsNeeded: "",
+    errors: [],
+  }
   
     render() {
       return(
