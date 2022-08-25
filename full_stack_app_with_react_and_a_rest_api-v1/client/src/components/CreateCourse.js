@@ -1,23 +1,21 @@
-import React, {Component } from 'react';
+import React from 'react';
 import Form from './Form';
-import { Link } from 'react-router-dom';
-
 
 export default class CreateCourse extends React.PureComponent {
-
+  
  state = {
-   courseTitle: "",
-   courseDescription: "", 
+  title: "",
+   description: "", 
    estimatedTime: "",
    materialsNeeded: "",
    errors: [],
  }
 
   render() {
-    const user = this.props
+
     const {
-      courseTitle, 
-      courseDescription, 
+    title, 
+      description, 
       estimatedTime, 
       materialsNeeded,
       errors
@@ -35,18 +33,18 @@ export default class CreateCourse extends React.PureComponent {
                 <React.Fragment>
                   <label htmlFor="coureTitle">Course Title</label>
                   <input 
-                    id="courseTitle" 
-                    name="courseTitle" 
+                    id="title" 
+                    name="title" 
                     type="text"
-                    value={courseTitle} 
+                    value={title} 
                     onChange={this.change}  />
-                    <p>By {user.firstName}</p>
-                    <label htmlFor="courseDescription">Course Description</label>
+                    <p>By</p>
+                    <label htmlFor="description">Course Description</label>
                     <input 
-                    id="courseDescription" 
-                    name="courseDescription" 
+                    id="description" 
+                    name="description" 
                     type="text"
-                    value={courseDescription} 
+                    value={description} 
                     onChange={this.change} />
                     <label htmlFor="estimatedTime">Estimated Time</label>
                   <input 
@@ -84,32 +82,29 @@ submit = () => {
   const { context } = this.props;
 
   const {
-    firstName,
-    lastName, 
-    emailAddress,
-    password,
+    title,
+    description, 
+    estimatedTime,
+    materialsNeeded,
   } = this.state; 
-  const user = {
-    firstName,
-    lastName,
-    emailAddress,
-    password,
+  const course = {
+    title,
+    description,
+    estimatedTime,
+    materialsNeeded,
   };
-  context.data.createUser(user)
+  context.data.createCourse(course)
+  .then(res => {
+    console.log(res);
+  })
   .then( errors => {
     if(errors.length) {
       this.setState({ errors });
     } else {
-      context.actions.signIn(emailAddress, password)
-      .then(() => {
         this.props.history.push('/');    
-      })
     }
     })
-    .catch( err => { // handle rejected promises
-      console.log(err);
-      this.props.history.push('/error');
-    });  
+  
 }
 
 cancel = () => {

@@ -65,15 +65,13 @@ export default class Data {
       throw new Error();
     }
   }
-  async createCourses(course, emailAddress, password) {
-    const response = await this.api('/courses/create', 'POST', course, null, true, {emailAddress, password});
+  async createCourse(course, emailAddress, password) {
+    const response = await this.api('/courses/create', 'POST', course, true, {emailAddress, password});
     if (response.status === 201) {
-      return response.json().then(data => data);
+      return [];
     }
     else if (response.status === 400) {
-      return response.json().then(data => {
-        return data.errors;
-      });
+      return response.json().then(data => data);
     }
     else {
       throw new Error();
