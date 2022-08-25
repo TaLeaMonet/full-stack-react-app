@@ -9,9 +9,11 @@ function CourseDetail() {
   const authUser = context.authenticatedUser
   const [errors, setErrors] = useState([]);
   const [course, setCourse] = useState([]);
-  const [user, setUser] = useState({firstName: "", lastName: ""});
- const {id} = useParams();
-  console.log(authUser);
+  const [user, setUser] = useState();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const {id} = useParams();
+  console.log(authUser.firstName);
 
 //  context.data.getCourse(id)
 //  .then((res) => {
