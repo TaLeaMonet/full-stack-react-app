@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Context } from './Context';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import UserSignOut from './UserSignOut';
 
 function CourseDetail() {
   const context = useContext(Context);
@@ -53,6 +54,8 @@ function CourseDetail() {
     <main>
       <div className="actions--bar">
         <div className="wrap">
+
+          {/* { authUser && authUser.id === u */}
           <Link className="button" to={`courses/${id}/update`}>
             Update Course
           </Link>
