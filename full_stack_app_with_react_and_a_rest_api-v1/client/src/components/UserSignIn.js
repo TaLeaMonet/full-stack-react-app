@@ -49,16 +49,6 @@ class UserSignIn extends Component {
           </div>
         </div>
       );
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 
     }
     change = (e) => {
