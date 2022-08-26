@@ -9,29 +9,18 @@ function CourseDetail() {
   const authUser = context.authenticatedUser
   const [errors, setErrors] = useState([]);
   const [course, setCourse] = useState([]);
-  const [user, setUser] = useState();
+  const [User, setUser] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const {id} = useParams();
-  console.log(authUser.firstName);
 
-//  context.data.getCourse(id)
-//  .then((res) => {
-//    console.log(res);
-//  })
-
- // Context approach
-  // useEffect(() => {
-  //   context.data.getCourse(id)
-  //   .then((res) => {
-  //     setCourse(res);
-  //     console.log(res);
-  //   });
-  // }) 
-
-  // Fetch approach
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/courses/${id}`)
+    fetch(`http://localhost:5000/api/courses/${id}`)
+    .then(user => {
+      setFirstName(User.firstName)
+      setLastName(User.lastName)
+      console.log(User);
+    })
       .then((res) => {
         console.log(res)
         setCourse(res.data)
@@ -58,7 +47,7 @@ function CourseDetail() {
       <div className="actions--bar">
         <div className="wrap">
 
-          { authUser && authUser.id === user.id ? (
+          { authUser && authUser.id === User.id ? (
           <React.Fragment>
           <Link className="button" to={`courses/${id}/update`}>
             Update Course
@@ -87,7 +76,7 @@ function CourseDetail() {
             <div>
               <h3 className="course--detail--title">Course</h3>
               <h4 className="course--name"></h4>
-              <p>{`By ${authUser.firstName} ${authUser.lastName}`}</p>
+              <p>{`By ${firstName} ${lastName}`}</p>
             </div>
             <div>
               <h3 className="course--detail--title">Estimated Time</h3>

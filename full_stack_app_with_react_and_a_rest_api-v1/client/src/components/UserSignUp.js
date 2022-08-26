@@ -68,14 +68,6 @@ export default class UserSignUp extends Component {
           </div>
         </div>
       );
-  
-  
-  
-  
-  
-  
-  
-  
   }
 
  change = (e) => {
@@ -115,7 +107,7 @@ submit = () => {
       })
     }
     })
-    .catch( err => { // handle rejected promises
+    .catch( err => {
       console.log(err);
       this.props.history.push('/error');
     });  

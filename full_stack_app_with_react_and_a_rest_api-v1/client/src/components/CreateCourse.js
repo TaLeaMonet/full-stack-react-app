@@ -32,7 +32,7 @@ export default class CreateCourse extends React.PureComponent {
               elements={() => (
                 <React.Fragment>
                   <div className='main--flex'>
-                    <div>
+                   <div>
                   <label htmlFor="coureTitle">Course Title</label>
                   <input 
                     id="title" 
@@ -42,7 +42,7 @@ export default class CreateCourse extends React.PureComponent {
                     onChange={this.change}  />
                     <p>By</p>
                     <label htmlFor="description">Course Description</label>
-                    <input 
+                    <textarea  
                     id="description" 
                     name="description" 
                     type="text"
@@ -58,7 +58,7 @@ export default class CreateCourse extends React.PureComponent {
                     value={estimatedTime} 
                     onChange={this.change} />
                     <label htmlFor="materialsNeeded">Materials Needed</label>
-                  <input 
+                  <textarea 
                     id="materialsNeeded" 
                     name="materialsNeeded"
                     type="text"
