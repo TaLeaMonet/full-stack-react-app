@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from './Form';
+import { Context } from './Context';
 
 export default class CreateCourse extends React.PureComponent {
   
@@ -40,7 +41,7 @@ export default class CreateCourse extends React.PureComponent {
                     type="text"
                     value={title} 
                     onChange={this.change}  />
-                    <p>By</p>
+                    <p>By {`${this.props.context.authenticatedUser.firstName} ${this.props.context.authenticatedUser.lastName}`}</p>
                     <label htmlFor="description">Course Description</label>
                     <textarea  
                     id="description" 
@@ -74,47 +75,40 @@ export default class CreateCourse extends React.PureComponent {
   }
 
  change = (e) => {
-   const name = e.target.name; 
-   const value = e.target.value; 
-
-   this.setState(() => {
-     return {
-       [name]:value,
-     }
-   })
+  const { name, value } = e.target;
+  this.setState(prevState => ({
+    ...prevState,
+    [name]: value
+  }));
  } 
 
 submit = () => {
   const { context } = this.props;
-  const emailAddress = context.authenticatedUser.user.emailAddress
-  const password = context.authenticatedUser.user.password
+  const { id, firstName, lastName, emailAddress, password } = context.authenticatedUser; 
 
   const {
     title,
     description, 
     estimatedTime,
     materialsNeeded,
+    userId,
   } = this.state; 
   const course = {
     title,
     description,
     estimatedTime,
     materialsNeeded,
+    userId: id,
   };
   context.data.createCourse(course, emailAddress, password)
-  .then(res => {
-    console.log(res);
-  })
   .then( errors => {
     if(errors.length) {
       this.setState({ errors });
     } else {
         this.props.history.push('/');    
     }
-    })
-  
+})
 }
-
 cancel = () => {
   this.props.history.push('/');
   }

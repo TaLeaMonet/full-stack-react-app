@@ -9,32 +9,32 @@ var bcrypt = require('bcryptjs');
 
 /* Custom middleware for error handling */
 function asyncHandler(cb){
-  return async (req, res, next)=>{
+  return async (req, res, next) => {
     try {
-      await cb(req,res, next);
-    } catch(err){
-      next(err);
+      await cb(req, res, next);
+    } catch (error) {
+      if (error.name === 'SequelizeValidationError' || error.name === 'SequelizeUniqueConstraintError') {
+        const errors = error.errors.map(err => err.message);
+        res.status(400).json({ errors });   
+      } else {
+        // Forward error to the global error handler
+        next(error);
+      }
     }
-  };
+  }
 }
 
 /* GET api/users - returns all properties and values for current auth user */ 
 router.get('/users', authenticateUser, asyncHandler(async(req, res) => {
    const user = await req.currentUser;
-  res.status(200).json({user});
+  res.status(200).json(user);
 }));
 
 
 /* POST /api/users - creates a new user */
 router.post('/users', asyncHandler(async(req, res) => {
-    try {
-    const user = await User.create(req.body);
+     await User.create(req.body);
     res.status(201).location("/").end();
-    }  catch(err) {
-    console.log('ERROR:', err.name);
-      res.status(400).json({ err })
-      throw err;
-  }
 }));
 
 /* GET api/courses - returns all courses including User associated */

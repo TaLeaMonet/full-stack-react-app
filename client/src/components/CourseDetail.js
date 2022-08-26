@@ -1,45 +1,31 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Context } from './Context';
-import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
-import UserSignOut from './UserSignOut';
+import { useParams, Link, useHistory } from 'react-router-dom';
+import ReactMarkdown  from 'react-markdown';
+
 
 function CourseDetail() {
   const context = useContext(Context);
-  const authUser = context.authenticatedUser
-  const [errors, setErrors] = useState([]);
   const [course, setCourse] = useState([]);
-  const [User, setUser] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const {id} = useParams();
-
+  const authUser = context.authenticatedUser;
+  const history = useHistory();
+  
   useEffect(() => {
-    fetch(`http://localhost:5000/api/courses/${id}`)
-    .then(user => {
-      setFirstName(User.firstName)
-      setLastName(User.lastName)
-      console.log(User);
-    })
-      .then((res) => {
-        console.log(res)
-        setCourse(res.data)
-        setUser(res.user)
-      })
-      .catch((err) => {
-        console.log(err.message)
-      });
+    context.data.getCourse(id)
+    .then(data => setCourse(data))
+    .catch(err => console.log(err));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
 
-  const deleteButton = () => {
-    const emailAddress = authUser.emailAddress
-    const password = authUser.password
-
-    context.data.deleteCourse(id, emailAddress, password)
-    .then((res) => {
-      console.log(res);
-    }) 
+  const deleteButton = async() => {
+    await context.data.deleteCourse(
+      id,
+      authUser.emailAddress,
+      authUser.password
+    );
+    history.push("/");
   }
 
   return (
@@ -47,25 +33,25 @@ function CourseDetail() {
       <div className="actions--bar">
         <div className="wrap">
 
-          { authUser && authUser.id === User.id ? (
+          { authUser && authUser.id === course.userId ? (
           <React.Fragment>
-          <Link className="button" to={`courses/${id}/update`}>
+          <Link className="button" to={`/courses/${id}/update`}>
             Update Course
           </Link>
-          <button className="button">
+          <button onClick={deleteButton} className="button">
             Delete Course
           </button>
           <Link className="button button-secondary" to="/">
             Return to List
           </Link>
           </React.Fragment>
-          ) : ( 
+          ) : (
             <React.Fragment>
                <Link className="button button-secondary" to="/">
             Return to List
           </Link>
           </React.Fragment>
-          )}   
+          )  }
         </div>
       </div>
       <div className="wrap">
@@ -75,14 +61,17 @@ function CourseDetail() {
           <div className="main--flex">
             <div>
               <h3 className="course--detail--title">Course</h3>
-              <h4 className="course--name"></h4>
-              <p>{`By ${firstName}`}</p>
+              <h4 className="course--name">{course.title}</h4>
+              <p>{`By ${course.User?.firstName} ${course.User?.lastName}`}</p>
+              <ReactMarkdown>{course.description}</ReactMarkdown>
             </div>
             <div>
               <h3 className="course--detail--title">Estimated Time</h3>
-              <p></p>
+              <p>{course.estimatedTime}</p>
               <h3 className="course--detail--title">Materials Needed</h3>
-              <ul className="course--detail--list"></ul>
+              <ul className="course--detail--list">
+                <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
+              </ul>
             </div>
           </div>
         </form>

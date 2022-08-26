@@ -22,24 +22,8 @@
         }
       },
 	},
-	estimatedTime: {
-	type: Sequelize.STRING,
-	allowNull: false,
-	validate: {
-        notEmpty: {
-          msg: 'Please provide a value for estimated time',
-        }
-      },
-	},
-	materialsNeeded: {
-	type: Sequelize.STRING,
-	allowNull: false,
-	validate: {
-        notEmpty: {
-          msg: 'Please provide a value for materials needed',
-        }
-      },
-	},
+	estimatedTime: Sequelize.STRING,
+	materialsNeeded: Sequelize.STRING,
 	}, { sequelize });
 	
 	Course.associate = (models) => {
