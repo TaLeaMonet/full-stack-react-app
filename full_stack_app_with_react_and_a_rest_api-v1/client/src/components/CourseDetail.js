@@ -76,7 +76,7 @@ function CourseDetail() {
             <div>
               <h3 className="course--detail--title">Course</h3>
               <h4 className="course--name"></h4>
-              <p>{`By ${firstName} ${lastName}`}</p>
+              <p>{`By ${firstName}`}</p>
             </div>
             <div>
               <h3 className="course--detail--title">Estimated Time</h3>
